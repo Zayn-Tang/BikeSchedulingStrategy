@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 import seaborn as sns
 from utils.InfoOf_bike_station import getInfoOfBike, getInfoOfStation, frequencyDateDicByStation
-from utils.Kmedoids import Kmedoids_main
+from utils.Tp_medoids import Tp_medoids
 from utils.Scheduling import Scheduling
 from utils.Dynamic import Dynamic
 
@@ -41,7 +41,7 @@ frequencyDateDicByStation(Trainingset)
 # 进行K-medoids聚类，目的是分治的思想，把一个大问题分解成好几个小问题解决
 with open("./data/DataBase/InfoOfStation.json", 'r') as sif:
     InfoOfStation = json.load(sif)
-best_SNO = Kmedoids_main(InfoOfStation)
+best_SNO = Tp_medoids(InfoOfStation)
 with open("./data/DataBase/KmediodsResult.json", 'w') as json_file:
     json.dump(best_SNO, json_file, ensure_ascii=False)
 
@@ -150,7 +150,5 @@ plt.ylabel("Density",fontsize=14)
 plt.savefig("./data/DataBase/BikeLifeDistribution.png")
 plt.show()
 plt.close()
-
-
 
 

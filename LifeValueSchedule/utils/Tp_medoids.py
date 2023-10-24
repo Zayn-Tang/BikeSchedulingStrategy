@@ -62,7 +62,7 @@ def get_throughput_recluster(InfoOfStation, medoids_idx):
     return Throughput, medoids_station, not_choosed_station
 
 
-def kmedoids(InfoOfStation, k):
+def Tp_medoids(InfoOfStation, k):
     medoids_idx = random.sample(InfoOfStation.keys(), k)
     pre_throughput, medoids_cluster, not_choosed_station = get_throughput_recluster(InfoOfStation, medoids_idx)
 
@@ -105,7 +105,7 @@ def kmedoids(InfoOfStation, k):
         iteration += 1
         patience += 1
 
-    print("Kmedoids Iteration Count: ", iteration)
+    print("Tp_medoids Iteration Count: ", iteration)
     return best_medoids_cluster, pre_throughput, iteration, not_choosed_station
 
 
@@ -152,12 +152,12 @@ def stationclustermap(Kmresult, InfoOfStation):
     map_osm.save(r'./StationMap.html')
 
 
-def Kmedoids_main(InfoOfStation):
-    best_medoids_cluster, throughput, iteration, not_choosed_station = kmedoids(InfoOfStation, MAX_CLUSTER)
-    print("Kmedoids Throughput: ", throughput)
+def Tp_medoids(InfoOfStation):
+    best_medoids_cluster, throughput, iteration, not_choosed_station = Tp_medoids(InfoOfStation, MAX_CLUSTER)
+    print("Tp_medoids Throughput: ", throughput)
 
     # all_dis = dis2center(InfoOfStation, best_medoids_cluster)
-    # print("Kmedoids Distance of All Nodes to Center:", all_dis)
+    # print("Tp_medoids Distance of All Nodes to Center:", all_dis)
 
     # # 热力图显示聚类结果
     # stationclustermap(best_medoids_cluster, InfoOfStation)
@@ -169,4 +169,4 @@ def Kmedoids_main(InfoOfStation):
 # kesi_arr = np.linspace(0.01, 0.06, 10)
 # for epoch in range(epochs):
 #     kesi = kesi_arr[epoch]
-#     K_mediods_cluster = Kmedoids_main(InfoOfStation)
+#     K_mediods_cluster = Tp_medoids(InfoOfStation)
