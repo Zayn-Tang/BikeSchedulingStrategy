@@ -90,6 +90,3 @@ def Scheduling(bif, sif, cif, day_number):
     sif_new, bif_new = MaxMinschWithDemand(sif, bif, cif, stRequ, bkLife, day_number)
     return sif_new, bif_new
 
-
-
-

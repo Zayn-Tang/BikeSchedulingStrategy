@@ -132,4 +132,3 @@ def Dynamic(readfilename, bif, sif, method="MinUpdate"):
                     sif, bif = MinUpdateInfo(sif, bif, row, start_time, driving_time, csv_writer)  # 车站最小使用量分配
     out.close()
     return sif, bif
-

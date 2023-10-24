@@ -95,3 +95,4 @@ ar = ar.reshape(-1, N, 1) * 7
 print(ar.shape)
 # ar.shape # (8784, 330, 1)
 np.save("./data/DataBase/BT_Data.npy", ar)
+

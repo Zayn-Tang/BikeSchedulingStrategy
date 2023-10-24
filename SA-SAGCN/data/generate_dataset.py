@@ -89,4 +89,3 @@ if __name__ == '__main__':
         os.makedirs(args.output_dir)
 
     generate_train_val_test(args)
-

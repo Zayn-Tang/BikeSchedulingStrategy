@@ -45,7 +45,6 @@ best_SNO = Kmedoids_main(InfoOfStation)
 with open("./data/DataBase/KmediodsResult.json", 'w') as json_file:
     json.dump(best_SNO, json_file, ensure_ascii=False)
 
-
 # 先进行一次调度，进行车站需求量归一化和车辆使用量归一化
 # 然后进行最大需求量分配最小使用量的标准进行调度，利用每个区域的车站value方差进行调度前后比较
 # 保存调度前后value信息，调度后车站车辆的信息更新

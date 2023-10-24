@@ -49,4 +49,3 @@ python main.py
     * `data/rowData/` 文件夹中存放原始 Citi Bike trip data 数据
     * `data/DataBase/` 文件夹下存放生成数据文件
 
-
