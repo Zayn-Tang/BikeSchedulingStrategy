@@ -393,9 +393,9 @@ class STSAGCN(nn.Module):
         """
 
         x = torch.relu(self.First_FC(x))  # B, Tin, N, Cin
-        x = self.attention(x)
 
         for model in self.STSGCLS:
+            x = self.attention(x)
             x = model(x, self.mask)
         # (B, T - 8, N, Cout)
 
