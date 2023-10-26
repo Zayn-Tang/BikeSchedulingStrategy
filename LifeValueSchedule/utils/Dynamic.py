@@ -5,7 +5,7 @@ from datetime import datetime
 import sys
 import  random
 from utils.InfoOf_bike_station import WeiBull
-from utils.Tp_medoids import Tp_medoids
+from utils.Tp_medoids import Tp_medoids_main
 from utils.Scheduling import Scheduling
 
 def RandomUpdateInfo(sif, bif, row, start_time, driving_time, csv_writer):
@@ -123,7 +123,7 @@ def Dynamic(readfilename, bif, sif, method="MinUpdate"):
                 # 调度
                 if start_time.strftime("%Y-%m-%d") != PreDay:
                     PreDay = start_time.strftime("%Y-%m-%d")
-                    cif = Tp_medoids(sif)
+                    cif = Tp_medoids_main(sif)
                     sif, bif = Scheduling(bif, sif, cif, start_time.day)
                     print("Method {} {} 完成调度。".format(method, PreDay))
                 if method=="Random":

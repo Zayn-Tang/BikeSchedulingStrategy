@@ -152,7 +152,7 @@ def stationclustermap(Kmresult, InfoOfStation):
     map_osm.save(r'./StationMap.html')
 
 
-def Tp_medoids(InfoOfStation):
+def Tp_medoids_main(InfoOfStation):
     best_medoids_cluster, throughput, iteration, not_choosed_station = Tp_medoids(InfoOfStation, MAX_CLUSTER)
     print("Tp_medoids Throughput: ", throughput)
 
