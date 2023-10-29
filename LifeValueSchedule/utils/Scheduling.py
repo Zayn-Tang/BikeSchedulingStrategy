@@ -26,18 +26,16 @@ def MaxMinschWithDemand(sif, bif, cif, stRequ, bkLife, day_number):
 
     station_demand = {}
     for station in sif.keys():
-        station_demand[station] = 1
+        station_demand[station] = 0
     for station, req in stRequ[str(day_number)]:
         station_demand[station] = req
     station_demand = sorted(station_demand.items(),key = lambda x:x[1])
-    # satisfy_num = []
 
     for clu in cif:
-        clu_station = [clu] + cif[clu]  # 全部集群内的车站
+        clu_station = [clu] + cif[clu]
         clu_station_demand = {}
         clu_bike_id = []
         clu_bike_life = {}
-        # clu_satisfy_num = 0 # 全部满足量
 
         # 在全部车站需求中选出当前集群的车站和其中的车辆
         for station, demand in station_demand:
@@ -51,34 +49,28 @@ def MaxMinschWithDemand(sif, bif, cif, stRequ, bkLife, day_number):
         j = 0  # 作为车子总数的统计
         bike_num = len(clu_bike_life)  # 总共该集群拥有的车子的数量
 
-        for station ,demand in clu_station_demand.items():
+        demand_num = len(clu_station_demand.values())
+        for station, demand in clu_station_demand.items():
+            demand = int(bike_num * demand/demand_num)  # 针对自行车数量和站点需求做归一化
             if j < bike_num:  # 集群内车子数量充足
-                # clu_satisfy_num += min(demand, sif[station][5]) # 需求量和车站现有车辆的最小值
                 temp = list(clu_bike_life.keys())[j:j+demand]
-                # 更新车子信息，包括：停靠车站，停靠车站经纬度
                 for bike_id in temp: # 选取 demand 个车子    
                     bif_new[bike_id][0] = station
                     bif_new[bike_id][1] = sif_new[station][0]
                     bif_new[bike_id][2] = sif_new[station][1]
-                # 更新车站信息，包括：停靠车子列表，停靠车子个数
                 sif_new[station][4] = temp
                 sif_new[station][5] = len(temp)
                 j = min(j+demand, bike_num)
-
             elif j>=bike_num:  # 车子数量不够
-                # print("Insufficient Number of Bikes.")
                 sif_new[station][4] = []
                 sif_new[station][5] = 0
 
-        # satisfy_num.append(clu_satisfy_num)
-        if j < bike_num:  # 自行车冗余，放在需求量最大的车站中
+        if j < bike_num:  # 剩余自行车，放在需求量最大的车站中
             temp = list(clu_bike_life.keys())[j:bike_num]
-            # 更新车子信息，包括：停靠车站，停靠车站经纬度
             for bike_id in temp:
                 bif_new[bike_id][0] = station
                 bif_new[bike_id][1] = sif_new[station][0]
                 bif_new[bike_id][2] = sif_new[station][1]
-            # 更新车站信息，包括：停靠车子列表，停靠车子个数
             sif_new[station][4] = temp
             sif_new[station][5] = len(temp)       
 

@@ -54,7 +54,17 @@ def get_throughput_recluster(InfoOfStation, medoids_idx):
             not_choosed_station.append(station)
 
     if(len(not_choosed_station)):
-        print("Not Choosed Station Num: ", len(not_choosed_station))
+        print("Break Kesi Limit Station Num: ", len(not_choosed_station))
+        for station in not_choosed_station:
+            min_dist = np.inf
+            choice = None
+            for idx, center in enumerate(medoids_idx):
+                tmp_dis = Manhattan_Distance(InfoOfStation[station], InfoOfStation[center])
+                if tmp_dis<min_dist:
+                    choice = idx
+                    min_dist = tmp_dis
+            medoids_station[medoids_idx[choice]].append(station)
+            medoids_throughput[choice] += InfoOfStation[station][2] - InfoOfStation[station][3]
 
     Throughput = 0
     for m in range(len(medoids_idx)):
@@ -170,3 +180,6 @@ def Tp_medoids_main(InfoOfStation):
 # for epoch in range(epochs):
 #     kesi = kesi_arr[epoch]
 #     K_mediods_cluster = Tp_medoids(InfoOfStation)
+
+
+
